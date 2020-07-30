@@ -1,0 +1,3 @@
+My name is Ueda.
+class time is 9:45 to 11:15
+class time is 11:25 to 12:55
