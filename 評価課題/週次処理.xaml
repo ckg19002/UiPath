@@ -1,4 +1,4 @@
-<Activity mc:Ignorable="sap sap2010" x:Class="週次処理" this:週次処理.sheetname="８月" this:週次処理.bookname="C:\Users\19002\Documents\UiPath\出席率変化の集計\files\出席簿集計表_2020_B1_渡邉(情報メディア学科）RPA.xlsm" this:週次処理.writebookname="C:\Users\19002\Documents\UiPath\出席率変化の集計\files\欠席時間集計表.xlsx" this:週次処理.writesheetname="Sheet1" this:週次処理.NINZU="3" this:週次処理.readcol="BF" this:週次処理.writecolname="C" this:週次処理.writeindex="C" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:av="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=mscorlib" xmlns:this="clr-namespace:" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Activity mc:Ignorable="sap sap2010" x:Class="週次処理" this:週次処理.sheetname="８月" this:週次処理.bookname="C:\Users\19002\Documents\UiPath\出席率変化の集計\files\出席簿集計表_2020_B1_渡邉(情報メディア学科）RPA.xlsm" this:週次処理.writebookname="C:\Users\19002\Documents\UiPath\出席率変化の集計\files\欠席時間集計表.xlsx" this:週次処理.writesheetname="Sheet1" this:週次処理.NINZU="3" this:週次処理.readcol="BF" this:週次処理.writecolname="C" this:週次処理.writeindex="AJ" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:av="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=mscorlib" xmlns:this="clr-namespace:" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <x:Members>
     <x:Property Name="sheetname" Type="InArgument(x:String)" />
     <x:Property Name="bookname" Type="InArgument(x:String)" />
@@ -68,11 +68,7 @@
     <Flowchart.Variables>
       <Variable x:TypeArguments="x:Int32" Name="counter" />
       <Variable x:TypeArguments="ui:GenericValue[]" Name="kekkadata" />
-      <Variable x:TypeArguments="x:Int32" Name="startcol">
-        <Variable.Default>
-          <Literal x:TypeArguments="x:Int32" Value="5" />
-        </Variable.Default>
-      </Variable>
+      <Variable x:TypeArguments="x:Int32" Default="5" Name="startcol" />
     </Flowchart.Variables>
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
@@ -115,7 +111,7 @@
               <av:PointCollection x:Key="ConnectorLocation">299.895,288.5 299.895,338.5</av:PointCollection>
             </scg:Dictionary>
           </sap:WorkflowViewStateService.ViewState>
-          <ui:ExcelApplicationScope Password="{x:Null}" DisplayName="Excel アプリケーション スコープ" sap:VirtualizedContainerService.HintSize="488,717" sap2010:WorkflowViewState.IdRef="ExcelApplicationScope_2" WorkbookPath="[bookname]">
+          <ui:ExcelApplicationScope Password="{x:Null}" DisplayName="Excel アプリケーション スコープ" sap:VirtualizedContainerService.HintSize="200,51" sap2010:WorkflowViewState.IdRef="ExcelApplicationScope_2" WorkbookPath="[bookname]">
             <ui:ExcelApplicationScope.Body>
               <ActivityAction x:TypeArguments="ui:WorkbookApplication">
                 <ActivityAction.Argument>
@@ -143,7 +139,7 @@
                             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                           </scg:Dictionary>
                         </sap:WorkflowViewStateService.ViewState>
-                        <ui:ExcelReadCell Cell="[readcol+(counter+ startcol).ToString]" DisplayName="セルを読み込み" sap:VirtualizedContainerService.HintSize="334,59" sap2010:WorkflowViewState.IdRef="ExcelReadCell_1" SheetName="[sheetname]">
+                        <ui:ExcelReadCell Cell="[writeindex+(startcol+counter).ToString]" DisplayName="セルを読み込み" sap:VirtualizedContainerService.HintSize="334,59" sap2010:WorkflowViewState.IdRef="ExcelReadCell_1" SheetName="[sheetname]">
                           <ui:ExcelReadCell.Result>
                             <OutArgument x:TypeArguments="ui:GenericValue">[kekkadata(counter)]</OutArgument>
                           </ui:ExcelReadCell.Result>
@@ -159,7 +155,7 @@
                       </Sequence>
                     </ui:InterruptibleWhile.Body>
                     <ui:InterruptibleWhile.Condition>
-                      <mva:VisualBasicValue x:TypeArguments="x:Boolean" ExpressionText="counter&lt;NINZU" sap2010:WorkflowViewState.IdRef="VisualBasicValue`1_1" />
+                      <mva:VisualBasicValue x:TypeArguments="x:Boolean" ExpressionText="counter&lt;NINZU" sap2010:WorkflowViewState.IdRef="VisualBasicValue`1_2" />
                     </ui:InterruptibleWhile.Condition>
                   </ui:InterruptibleWhile>
                 </Sequence>
@@ -179,7 +175,7 @@
                   <av:Size x:Key="ShapeSize">200,51</av:Size>
                 </scg:Dictionary>
               </sap:WorkflowViewStateService.ViewState>
-              <ui:ExcelApplicationScope Password="{x:Null}" DisplayName="Excel アプリケーション スコープ" sap:VirtualizedContainerService.HintSize="200,51" sap2010:WorkflowViewState.IdRef="ExcelApplicationScope_3" WorkbookPath="[writebookname]">
+              <ui:ExcelApplicationScope Password="{x:Null}" DisplayName="Excel アプリケーション スコープ" sap:VirtualizedContainerService.HintSize="488,745" sap2010:WorkflowViewState.IdRef="ExcelApplicationScope_3" WorkbookPath="[writebookname]">
                 <ui:ExcelApplicationScope.Body>
                   <ActivityAction x:TypeArguments="ui:WorkbookApplication">
                     <ActivityAction.Argument>
@@ -207,7 +203,7 @@
                                 <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                               </scg:Dictionary>
                             </sap:WorkflowViewStateService.ViewState>
-                            <ui:ExcelWriteCell Cell="[writecolname+(counter+2).ToString]" DisplayName="セルに書き込み" sap:VirtualizedContainerService.HintSize="334,87" sap2010:WorkflowViewState.IdRef="ExcelWriteCell_1" SheetName="[writesheetname]" Text="[kekkadata(counter)]" />
+                            <ui:ExcelWriteCell Cell="[writecolname+(counter+1).ToString]" DisplayName="セルに書き込み" sap:VirtualizedContainerService.HintSize="334,87" sap2010:WorkflowViewState.IdRef="ExcelWriteCell_1" SheetName="[writesheetname]" Text="[kekkadata(counter)]" />
                             <Assign DisplayName="代入" sap:VirtualizedContainerService.HintSize="334,60" sap2010:WorkflowViewState.IdRef="Assign_6">
                               <Assign.To>
                                 <OutArgument x:TypeArguments="x:Int32">[counter]</OutArgument>
@@ -219,7 +215,7 @@
                           </Sequence>
                         </ui:InterruptibleWhile.Body>
                         <ui:InterruptibleWhile.Condition>
-                          <mva:VisualBasicValue x:TypeArguments="x:Boolean" ExpressionText="counter&lt;NINZU" />
+                          <mva:VisualBasicValue x:TypeArguments="x:Boolean" ExpressionText="counter&lt;NINZU" sap2010:WorkflowViewState.IdRef="VisualBasicValue`1_3" />
                         </ui:InterruptibleWhile.Condition>
                       </ui:InterruptibleWhile>
                     </Sequence>
