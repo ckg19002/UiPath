@@ -28,6 +28,7 @@
       <x:String>System.Activities.DynamicUpdate</x:String>
       <x:String>System.Collections.ObjectModel</x:String>
       <x:String>Microsoft.VisualBasic.CompilerServices</x:String>
+      <x:String>System.Runtime.Serialization</x:String>
     </sco:Collection>
   </TextExpression.NamespacesForImplementation>
   <TextExpression.ReferencesForImplementation>
@@ -57,17 +58,18 @@
       <AssemblyReference>UiPath.OCR.Activities.Design</AssemblyReference>
       <AssemblyReference>UiPath.UIAutomationCore</AssemblyReference>
       <AssemblyReference>System.ServiceModel</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
   <Flowchart DisplayName="フローチャート" sap:VirtualizedContainerService.HintSize="634,636" sap2010:WorkflowViewState.IdRef="Flowchart_1">
     <Flowchart.Variables>
       <Variable x:TypeArguments="ui:WorkbookApplication" Name="MyWorkBook" />
-      <Variable x:TypeArguments="s:String[]" Name="成績の入っていない科目リスト">
+      <Variable x:TypeArguments="s:String[]" Default="[{&quot;学年末単位認定試験成績台帳(記録)&quot;,&quot;注意事項参考(旧フォーマット版)&quot;,&quot;科目名&quot;,&quot;シートをコピーして追加→&quot;,&quot;集計表&quot;}]" Name="成績の入っていない科目リスト" />
+      <Variable x:TypeArguments="x:Boolean" Name="flag">
         <Variable.Default>
-          <mva:VisualBasicValue x:TypeArguments="s:String[]" ExpressionText="{}{&quot;学年末単位認定試験成績台帳(記録)&quot;,&quot;注意事項参考(旧フォーマット版)&quot;,&quot;科目名&quot;,&quot;シートをコピーして追加→&quot;,&quot;集計表&quot;}" />
+          <Literal x:TypeArguments="x:Boolean" />
         </Variable.Default>
       </Variable>
-      <Variable x:TypeArguments="x:Boolean" Name="flag" />
     </Flowchart.Variables>
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
@@ -87,30 +89,47 @@
           <av:Size x:Key="ShapeSize">200,51</av:Size>
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
-      <ui:ExcelApplicationScope Password="{x:Null}" WorkbookPath="{x:Null}" DisplayName="Excel アプリケーション スコープ" sap:VirtualizedContainerService.HintSize="723,996" sap2010:WorkflowViewState.IdRef="ExcelApplicationScope_1" InstanceCachePeriod="3000">
+      <ui:ExcelApplicationScope Password="{x:Null}" WorkbookPath="{x:Null}" DisplayName="Excel アプリケーション スコープ" sap:VirtualizedContainerService.HintSize="765,1158" sap2010:WorkflowViewState.IdRef="ExcelApplicationScope_1" InstanceCachePeriod="3000">
         <ui:ExcelApplicationScope.Body>
           <ActivityAction x:TypeArguments="ui:WorkbookApplication">
             <ActivityAction.Argument>
               <DelegateInArgument x:TypeArguments="ui:WorkbookApplication" Name="ExcelWorkbookScope" />
             </ActivityAction.Argument>
-            <Sequence DisplayName="実行" sap:VirtualizedContainerService.HintSize="689,887" sap2010:WorkflowViewState.IdRef="Sequence_2">
+            <Sequence DisplayName="実行" sap:VirtualizedContainerService.HintSize="731,1049" sap2010:WorkflowViewState.IdRef="Sequence_2">
               <sap:WorkflowViewStateService.ViewState>
                 <scg:Dictionary x:TypeArguments="x:String, x:Object">
                   <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                 </scg:Dictionary>
               </sap:WorkflowViewStateService.ViewState>
-              <ParallelForEach x:TypeArguments="x:String" DisplayName="並列繰り返し (コレクションの各要素)" sap:VirtualizedContainerService.HintSize="647,795" sap2010:WorkflowViewState.IdRef="ParallelForEach`1_2" Values="[MyWorkBook.GetSheets]">
+              <ParallelForEach x:TypeArguments="x:String" DisplayName="並列繰り返し (コレクションの各要素)" sap:VirtualizedContainerService.HintSize="689,957" sap2010:WorkflowViewState.IdRef="ParallelForEach`1_2" Values="[MyWorkBook.GetSheets]">
                 <ActivityAction x:TypeArguments="x:String">
                   <ActivityAction.Argument>
                     <DelegateInArgument x:TypeArguments="x:String" Name="item" />
                   </ActivityAction.Argument>
-                  <Sequence DisplayName="シーケンス" sap:VirtualizedContainerService.HintSize="597,648" sap2010:WorkflowViewState.IdRef="Sequence_1">
+                  <Sequence DisplayName="シーケンス" sap:VirtualizedContainerService.HintSize="639,810" sap2010:WorkflowViewState.IdRef="Sequence_1">
+                    <Sequence.Variables>
+                      <Variable x:TypeArguments="s:String[]" Name="MyScoreArray">
+                        <Variable.Default>
+                          <mva:VisualBasicValue x:TypeArguments="s:String[]" ExpressionText="{}{&quot;D&quot;,&quot;G&quot;,&quot;J&quot;,&quot;M&quot;,&quot;P&quot;,&quot;S&quot;,&quot;V&quot;,&quot;Y&quot;,&quot;AB&quot;,&quot;AE&quot;}" />
+                        </Variable.Default>
+                      </Variable>
+                      <Variable x:TypeArguments="s:String[]" Name="MyKekkaArray">
+                        <Variable.Default>
+                          <mva:VisualBasicValue x:TypeArguments="s:String[]" ExpressionText="{}{&quot;E&quot;,&quot;H&quot;,&quot;K&quot;,&quot;N&quot;,&quot;Q&quot;,&quot;T&quot;,&quot;W&quot;,&quot;Z&quot;,&quot;AC&quot;,&quot;AF&quot;}" />
+                        </Variable.Default>
+                      </Variable>
+                      <Variable x:TypeArguments="x:Int32" Name="Index">
+                        <Variable.Default>
+                          <Literal x:TypeArguments="x:Int32" />
+                        </Variable.Default>
+                      </Variable>
+                    </Sequence.Variables>
                     <sap:WorkflowViewStateService.ViewState>
                       <scg:Dictionary x:TypeArguments="x:String, x:Object">
                         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                       </scg:Dictionary>
                     </sap:WorkflowViewStateService.ViewState>
-                    <Assign DisplayName="代入" sap:VirtualizedContainerService.HintSize="555,60" sap2010:WorkflowViewState.IdRef="Assign_1">
+                    <Assign DisplayName="代入" sap:VirtualizedContainerService.HintSize="597,60" sap2010:WorkflowViewState.IdRef="Assign_1">
                       <Assign.To>
                         <OutArgument x:TypeArguments="x:Boolean">[flag]</OutArgument>
                       </Assign.To>
@@ -118,22 +137,37 @@
                         <InArgument x:TypeArguments="x:Boolean">False</InArgument>
                       </Assign.Value>
                     </Assign>
-                    <ParallelForEach x:TypeArguments="x:String" DisplayName="並列繰り返し (コレクションの各要素)" sap:VirtualizedContainerService.HintSize="555,355" sap2010:WorkflowViewState.IdRef="ParallelForEach`1_1" Values="[成績の入っていない科目リスト]">
+                    <ParallelForEach x:TypeArguments="x:String" DisplayName="並列繰り返し (コレクションの各要素)" sap:VirtualizedContainerService.HintSize="597,618" sap2010:WorkflowViewState.IdRef="ParallelForEach`1_1" Values="[成績の入っていない科目リスト]">
                       <ActivityAction x:TypeArguments="x:String">
                         <ActivityAction.Argument>
                           <DelegateInArgument x:TypeArguments="x:String" Name="item2" />
                         </ActivityAction.Argument>
-                        <If Condition="[item=item2]" DisplayName="条件分岐" sap:VirtualizedContainerService.HintSize="505,208" sap2010:WorkflowViewState.IdRef="If_1">
-                          <If.Then>
-                            <WriteLine DisplayName="1 行を書き込み" sap:VirtualizedContainerService.HintSize="230,61" sap2010:WorkflowViewState.IdRef="WriteLine_1" Text="除外対象" />
-                          </If.Then>
-                          <If.Else>
-                            <WriteLine DisplayName="1 行を書き込み" sap:VirtualizedContainerService.HintSize="230,61" sap2010:WorkflowViewState.IdRef="WriteLine_2" Text="転記対象" />
-                          </If.Else>
-                        </If>
+                        <Sequence DisplayName="シーケンス" sap:VirtualizedContainerService.HintSize="547,451" sap2010:WorkflowViewState.IdRef="Sequence_3">
+                          <sap:WorkflowViewStateService.ViewState>
+                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                            </scg:Dictionary>
+                          </sap:WorkflowViewStateService.ViewState>
+                          <If Condition="[item=item2]" DisplayName="条件分岐" sap:VirtualizedContainerService.HintSize="505,259" sap2010:WorkflowViewState.IdRef="If_1">
+                            <If.Else>
+                              <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="ワークフロー ファイルを呼び出し" sap:VirtualizedContainerService.HintSize="334,112" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="1科目の成績転記.xaml">
+                                <ui:InvokeWorkflowFile.Arguments>
+                                  <scg:Dictionary x:TypeArguments="x:String, Argument" />
+                                </ui:InvokeWorkflowFile.Arguments>
+                              </ui:InvokeWorkflowFile>
+                            </If.Else>
+                          </If>
+                          <Assign DisplayName="代入" sap:VirtualizedContainerService.HintSize="505,60" sap2010:WorkflowViewState.IdRef="Assign_2">
+                            <Assign.To>
+                              <OutArgument x:TypeArguments="x:Int32">[Index]</OutArgument>
+                            </Assign.To>
+                            <Assign.Value>
+                              <InArgument x:TypeArguments="x:Int32">[Index+1]</InArgument>
+                            </Assign.Value>
+                          </Assign>
+                        </Sequence>
                       </ActivityAction>
                     </ParallelForEach>
-                    <WriteLine DisplayName="1 行を書き込み" sap:VirtualizedContainerService.HintSize="555,61" sap2010:WorkflowViewState.IdRef="WriteLine_3" Text="[item]" />
                   </Sequence>
                 </ActivityAction>
               </ParallelForEach>
