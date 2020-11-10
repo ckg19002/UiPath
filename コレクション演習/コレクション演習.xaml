@@ -61,7 +61,11 @@
     <Flowchart.Variables>
       <Variable x:TypeArguments="scg:List(x:String)" Name="MySheetNames" />
       <Variable x:TypeArguments="ui:WorkbookApplication" Name="MyWorkbook" />
-      <Variable x:TypeArguments="x:String" Name="WORKBOOKNAME" />
+      <Variable x:TypeArguments="x:String" Name="WORKBOOKNAME">
+        <Variable.Default>
+          <Literal x:TypeArguments="x:String">files\課題３\科目成績クラスデータ（dummy）.xlsm</Literal>
+        </Variable.Default>
+      </Variable>
     </Flowchart.Variables>
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
@@ -104,7 +108,7 @@
               <av:PointCollection x:Key="ConnectorLocation">300,215.5 300,234.5</av:PointCollection>
             </scg:Dictionary>
           </sap:WorkflowViewStateService.ViewState>
-          <ui:ExcelApplicationScope Password="{x:Null}" DisplayName="Excel アプリケーション スコープ" sap:VirtualizedContainerService.HintSize="200,51" sap2010:WorkflowViewState.IdRef="ExcelApplicationScope_1" InstanceCachePeriod="3000" Workbook="[MyWorkbook]" WorkbookPath="files\課題３\科目成績クラスデータ（dummy）.xlsm">
+          <ui:ExcelApplicationScope Password="{x:Null}" DisplayName="Excel アプリケーション スコープ" sap:VirtualizedContainerService.HintSize="434,408" sap2010:WorkflowViewState.IdRef="ExcelApplicationScope_1" InstanceCachePeriod="3000" Workbook="[MyWorkbook]" WorkbookPath="[WORKBOOKNAME]">
             <ui:ExcelApplicationScope.Body>
               <ActivityAction x:TypeArguments="ui:WorkbookApplication">
                 <ActivityAction.Argument>
