@@ -5,7 +5,7 @@
   <mva:VisualBasic.Settings>
     <x:Null />
   </mva:VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>654,801</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>934,801</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>出席不良のピックアップ_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <sco:Collection x:TypeArguments="x:String">
@@ -83,39 +83,15 @@
       <Variable x:TypeArguments="x:String" Default="files\課題２\CKGBC_生活指導報告資料(ｄｕｍｍｙ).xlsx" Name="WORKBOOK_OUT" />
       <Variable x:TypeArguments="x:String" Default="報告資料" Name="WORKSHEET_OUT" />
       <Variable x:TypeArguments="x:Int32" Default="56" Name="wIndex" />
-      <Variable x:TypeArguments="scg:Dictionary(x:String, x:String)" Name="dGetu">
-        <Variable.Default>
-          <mva:VisualBasicValue x:TypeArguments="scg:Dictionary(x:String, x:String)" ExpressionText="New Dictionary(Of String,String)" />
-        </Variable.Default>
-      </Variable>
-      <Variable x:TypeArguments="scg:Dictionary(x:String, x:String)" Name="dKa">
-        <Variable.Default>
-          <mva:VisualBasicValue x:TypeArguments="scg:Dictionary(x:String, x:String)" ExpressionText="New Dictionary(Of String,String)" />
-        </Variable.Default>
-      </Variable>
+      <Variable x:TypeArguments="scg:Dictionary(x:String, x:String)" Default="[New Dictionary(Of String,String)]" Name="dGetu" />
+      <Variable x:TypeArguments="scg:Dictionary(x:String, x:String)" Default="[New Dictionary(Of String,String)]" Name="dKa" />
       <Variable x:TypeArguments="scg:Dictionary(x:String, x:String)" Name="dSui" />
       <Variable x:TypeArguments="scg:Dictionary(x:String, x:String)" Name="dMoku" />
-      <Variable x:TypeArguments="scg:Dictionary(x:String, x:String)" Name="dKin">
-        <Variable.Default>
-          <mva:VisualBasicValue x:TypeArguments="scg:Dictionary(x:String, x:String)" ExpressionText="New Dictionary(Of String,String)" />
-        </Variable.Default>
-      </Variable>
-      <Variable x:TypeArguments="x:Int32" Name="r4Index">
-        <Variable.Default>
-          <Literal x:TypeArguments="x:Int32" Value="4" />
-        </Variable.Default>
-      </Variable>
-      <Variable x:TypeArguments="x:Int32" Name="r4EndIndex">
-        <Variable.Default>
-          <Literal x:TypeArguments="x:Int32" Value="23" />
-        </Variable.Default>
-      </Variable>
+      <Variable x:TypeArguments="scg:Dictionary(x:String, x:String)" Default="[New Dictionary(Of String,String)]" Name="dKin" />
+      <Variable x:TypeArguments="x:Int32" Default="4" Name="r4Index" />
+      <Variable x:TypeArguments="x:Int32" Default="23" Name="r4EndIndex" />
       <Variable x:TypeArguments="ui:GenericValue" Name="cellStatus" />
-      <Variable x:TypeArguments="x:String" Name="TSHEET">
-        <Variable.Default>
-          <Literal x:TypeArguments="x:String">一般2年生</Literal>
-        </Variable.Default>
-      </Variable>
+      <Variable x:TypeArguments="x:String" Default="一般2年生" Name="TSHEET" />
     </Flowchart.Variables>
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
@@ -136,7 +112,7 @@
           <av:PointCollection x:Key="ConnectorLocation">300,215.5 300,234.5</av:PointCollection>
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
-      <ui:ExcelApplicationScope Password="{x:Null}" DisplayName="出席率85％未満の選択" sap:VirtualizedContainerService.HintSize="200,51" sap2010:WorkflowViewState.IdRef="ExcelApplicationScope_1" InstanceCachePeriod="3000" WorkbookPath="files\課題２\出席率_大橋校（２年：渡邉）RPA (2).xlsx">
+      <ui:ExcelApplicationScope Password="{x:Null}" DisplayName="出席率85％未満の選択" sap:VirtualizedContainerService.HintSize="701,1415" sap2010:WorkflowViewState.IdRef="ExcelApplicationScope_1" InstanceCachePeriod="3000" WorkbookPath="files\課題２\出席率_大橋校（２年：渡邉）RPA (2).xlsx">
         <ui:ExcelApplicationScope.Body>
           <ActivityAction x:TypeArguments="ui:WorkbookApplication">
             <ActivityAction.Argument>
@@ -148,9 +124,9 @@
                   <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                 </scg:Dictionary>
               </sap:WorkflowViewStateService.ViewState>
-              <ui:InterruptibleWhile DisplayName="繰り返し (前判定)" sap:VirtualizedContainerService.HintSize="625,1114" sap2010:WorkflowViewState.IdRef="InterruptibleWhile_1">
+              <ui:InterruptibleWhile DisplayName="繰り返し (前判定)" sap:VirtualizedContainerService.HintSize="625,1214" sap2010:WorkflowViewState.IdRef="InterruptibleWhile_1">
                 <ui:InterruptibleWhile.Body>
-                  <Sequence DisplayName="本体" sap:VirtualizedContainerService.HintSize="589,949" sap2010:WorkflowViewState.IdRef="Sequence_2">
+                  <Sequence DisplayName="本体" sap:VirtualizedContainerService.HintSize="589,1049" sap2010:WorkflowViewState.IdRef="Sequence_2">
                     <sap:WorkflowViewStateService.ViewState>
                       <scg:Dictionary x:TypeArguments="x:String, x:Object">
                         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -204,20 +180,20 @@
                         </Sequence>
                       </If.Then>
                     </If>
+                    <Assign DisplayName="代入" sap:VirtualizedContainerService.HintSize="547,60" sap2010:WorkflowViewState.IdRef="Assign_2">
+                      <Assign.To>
+                        <OutArgument x:TypeArguments="x:Int32">[rIndex]</OutArgument>
+                      </Assign.To>
+                      <Assign.Value>
+                        <InArgument x:TypeArguments="x:Int32">[rIndex+1]</InArgument>
+                      </Assign.Value>
+                    </Assign>
                   </Sequence>
                 </ui:InterruptibleWhile.Body>
                 <ui:InterruptibleWhile.Condition>
                   <mva:VisualBasicValue x:TypeArguments="x:Boolean" ExpressionText="rIndex&lt;=rEndIndex" sap2010:WorkflowViewState.IdRef="VisualBasicValue`1_1" />
                 </ui:InterruptibleWhile.Condition>
               </ui:InterruptibleWhile>
-              <Assign DisplayName="代入" sap:VirtualizedContainerService.HintSize="625,60" sap2010:WorkflowViewState.IdRef="Assign_2">
-                <Assign.To>
-                  <OutArgument x:TypeArguments="x:Int32">[rIndex]</OutArgument>
-                </Assign.To>
-                <Assign.Value>
-                  <InArgument x:TypeArguments="x:Int32">[rIndex+1]</InArgument>
-                </Assign.Value>
-              </Assign>
             </Sequence>
           </ActivityAction>
         </ui:ExcelApplicationScope.Body>
@@ -267,7 +243,7 @@
                             <InArgument x:TypeArguments="x:Int32">4</InArgument>
                           </Assign.Value>
                         </Assign>
-                        <ui:InterruptibleWhile DisplayName="繰り返し (前判定)" sap:VirtualizedContainerService.HintSize="625,1650" sap2010:WorkflowViewState.IdRef="InterruptibleWhile_2">
+                        <ui:InterruptibleWhile Condition="[r4Index&lt;=r4EndIndex]" DisplayName="繰り返し (前判定)" sap:VirtualizedContainerService.HintSize="625,1650" sap2010:WorkflowViewState.IdRef="InterruptibleWhile_2">
                           <ui:InterruptibleWhile.Body>
                             <Sequence DisplayName="本体" sap:VirtualizedContainerService.HintSize="589,1485" sap2010:WorkflowViewState.IdRef="Sequence_7">
                               <sap:WorkflowViewStateService.ViewState>
@@ -366,9 +342,6 @@
                               </Assign>
                             </Sequence>
                           </ui:InterruptibleWhile.Body>
-                          <ui:InterruptibleWhile.Condition>
-                            <mva:VisualBasicValue x:TypeArguments="x:Boolean" ExpressionText="r4Index&lt;=r4EndIndex" />
-                          </ui:InterruptibleWhile.Condition>
                         </ui:InterruptibleWhile>
                       </Sequence>
                     </ActivityAction>
