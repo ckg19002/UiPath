@@ -65,8 +65,16 @@
       <Variable x:TypeArguments="ui:GenericValue" Name="strName" />
       <Variable x:TypeArguments="ui:GenericValue" Name="iType" />
       <Variable x:TypeArguments="ui:GenericValue" Name="iCarName" />
-      <Variable x:TypeArguments="x:String" Name="typeName" />
-      <Variable x:TypeArguments="x:String" Name="realName" />
+      <Variable x:TypeArguments="scg:Dictionary(x:String, x:String)" Name="typeName">
+        <Variable.Default>
+          <mva:VisualBasicValue x:TypeArguments="scg:Dictionary(x:String, x:String)" ExpressionText="New Dictionary(of String,string)" />
+        </Variable.Default>
+      </Variable>
+      <Variable x:TypeArguments="scg:Dictionary(x:String, x:String)" Name="realName">
+        <Variable.Default>
+          <mva:VisualBasicValue x:TypeArguments="scg:Dictionary(x:String, x:String)" ExpressionText="New Dictionary(of string,string)" />
+        </Variable.Default>
+      </Variable>
     </Flowchart.Variables>
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
@@ -106,7 +114,7 @@
                   <InArgument x:TypeArguments="x:Int32">2</InArgument>
                 </Assign.Value>
               </Assign>
-              <ui:InterruptibleWhile DisplayName="繰り返し (前判定)" sap:VirtualizedContainerService.HintSize="412,416" sap2010:WorkflowViewState.IdRef="InterruptibleWhile_1">
+              <ui:InterruptibleWhile Condition="[iCount&gt;=10]" DisplayName="繰り返し (前判定)" sap:VirtualizedContainerService.HintSize="412,416" sap2010:WorkflowViewState.IdRef="InterruptibleWhile_1">
                 <ui:InterruptibleWhile.Body>
                   <Sequence DisplayName="本体" sap:VirtualizedContainerService.HintSize="376,251" sap2010:WorkflowViewState.IdRef="Sequence_1">
                     <sap:WorkflowViewStateService.ViewState>
@@ -116,7 +124,7 @@
                     </sap:WorkflowViewStateService.ViewState>
                     <ui:ExcelReadCell Cell="[&quot;A&quot;+iCount.ToString]" DisplayName="セルを読み込み" sap:VirtualizedContainerService.HintSize="334,59" sap2010:WorkflowViewState.IdRef="ExcelReadCell_1" SheetName="Sheet1">
                       <ui:ExcelReadCell.Result>
-                        <OutArgument x:TypeArguments="x:String">[typeName]</OutArgument>
+                        <OutArgument x:TypeArguments="scg:Dictionary(x:String, x:String)">[typeName]</OutArgument>
                       </ui:ExcelReadCell.Result>
                     </ui:ExcelReadCell>
                     <Assign DisplayName="代入" sap:VirtualizedContainerService.HintSize="334,60" sap2010:WorkflowViewState.IdRef="Assign_2">
@@ -124,14 +132,11 @@
                         <OutArgument x:TypeArguments="x:Int32">[iCount]</OutArgument>
                       </Assign.To>
                       <Assign.Value>
-                        <InArgument x:TypeArguments="x:Int32">[iCount+10]</InArgument>
+                        <InArgument x:TypeArguments="x:Int32">[iCount+1]</InArgument>
                       </Assign.Value>
                     </Assign>
                   </Sequence>
                 </ui:InterruptibleWhile.Body>
-                <ui:InterruptibleWhile.Condition>
-                  <mva:VisualBasicValue x:TypeArguments="x:Boolean" ExpressionText="iCount&gt;=10" />
-                </ui:InterruptibleWhile.Condition>
               </ui:InterruptibleWhile>
               <Assign DisplayName="代入" sap:VirtualizedContainerService.HintSize="412,60" sap2010:WorkflowViewState.IdRef="Assign_3">
                 <Assign.To>
@@ -141,7 +146,7 @@
                   <InArgument x:TypeArguments="x:Int32">2</InArgument>
                 </Assign.Value>
               </Assign>
-              <ui:InterruptibleWhile DisplayName="繰り返し (前判定)" sap:VirtualizedContainerService.HintSize="412,669" sap2010:WorkflowViewState.IdRef="InterruptibleWhile_2">
+              <ui:InterruptibleWhile Condition="[iCount&gt;=8]" DisplayName="繰り返し (前判定)" sap:VirtualizedContainerService.HintSize="412,669" sap2010:WorkflowViewState.IdRef="InterruptibleWhile_2">
                 <ui:InterruptibleWhile.Body>
                   <Sequence DisplayName="本体" sap:VirtualizedContainerService.HintSize="376,504" sap2010:WorkflowViewState.IdRef="Sequence_2">
                     <Sequence.Variables>
@@ -166,9 +171,6 @@
                     <ui:ExcelWriteCell Cell="D1" DisplayName="セルに書き込み" sap:VirtualizedContainerService.HintSize="334,87" sap2010:WorkflowViewState.IdRef="ExcelWriteCell_2" SheetName="Sheet1" Text="[iCarName]" />
                   </Sequence>
                 </ui:InterruptibleWhile.Body>
-                <ui:InterruptibleWhile.Condition>
-                  <mva:VisualBasicValue x:TypeArguments="x:Boolean" ExpressionText="iCount&gt;=8" />
-                </ui:InterruptibleWhile.Condition>
               </ui:InterruptibleWhile>
             </Sequence>
           </ActivityAction>
